@@ -18,7 +18,9 @@ void Try(int k) {
 }
 
 int main() {
-    freopen("/home/ashley/Documents/Hust/Applied-Algorithm/Repo/0.INP", "r", stdin);
+    ios::sync_with_stdio(false); cin.tie(0);
+    cout.tie(0);
+    //freopen("/home/ashley/Documents/Hust/Applied-Algorithm/Repo/0.INP", "r", stdin);
     cin >> n;
     Try(1);
 
