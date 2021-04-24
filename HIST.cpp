@@ -1,30 +1,34 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<stack>
+#include<vector>
 using namespace std;
-#define MAX 10000000
 
-long long MaxArea(int n) {
-    int temp;
+long long getArea(int n)
+{   int tmp;
     vector<int> hist;
     for (int i = 0; i < n; i++) {
-        cin >> temp;
-        hist.push_back(temp);
+        cin >> tmp;
+        hist.push_back(tmp);
     }
-    hist.push_back(0);
-    stack<int> st;
+    hist.push_back(0); // sentinel to ensure all indexes get popped off the stack
+    stack<int> S;
     long long maxArea = 0;
     for (int i = 0; i < hist.size(); i++) {
-
+        while (!S.empty() && hist[S.top()] >= hist[i]) {
+            long long height = hist[S.top()];
+            S.pop();
+            int left = S.empty() ? 0 : S.top() + 1, right = i - 1;
+            maxArea = max(maxArea, (right - left + 1) * height);
+        }
+        S.push(i);
     }
+    return maxArea;
 }
-
-int main()
-{
-    auto * hist = new long long[MAX];
+int main() {
     int n;
     while (cin >> n) {
         if (n == 0) break;
-        else cout << MaxArea(n) << endl;
+        else cout << getArea(n) << endl;
     }
-
     return 0;
 }
